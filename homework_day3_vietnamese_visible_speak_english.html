@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Homework Day 3 – TOEIC + Từ vựng + Bài nói</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6f9;color:#202124;font-family:Arial,"Microsoft JhengHei","Noto Sans TC",sans-serif}
+.wrap{max-width:1120px;margin:20px auto;padding:0 14px}.card{background:#fff;border:1px solid #e1e5ea;border-radius:18px;padding:20px;box-shadow:0 4px 18px rgba(0,0,0,.045)}
+h1{font-size:24px;margin:0 0 5px}.muted,.small{font-size:13px;color:#6b7280}.row,.tabs,.modes,.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.row{margin:12px 0}.grow{flex:1}
+button,select,input,textarea{font:inherit}.btn,.tab,.mode,.choice{border:1px solid #d1d5db;background:#fff;border-radius:14px;padding:9px 12px;cursor:pointer;touch-action:manipulation}.tab.active,.mode.active{background:#202124;color:#fff;border-color:#202124}
+.tabs{margin:15px 0}.modes{margin:12px 0;padding-top:12px;border-top:1px solid #eceff3}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}.stat{background:#f7f8fa;border-radius:11px;padding:10px;text-align:center}.stat b{display:block;font-size:19px}
+.prompt{font-size:27px;font-weight:700;line-height:1.35;margin:16px 0}.context,.listen,.speechbox{background:#f8fafc;border-radius:11px;padding:13px;margin:10px 0;line-height:1.6}.listen{text-align:center;cursor:pointer}.listen .ico{font-size:36px}
+.shortcut{background:#f7f8fa;border-radius:10px;padding:10px 12px;margin:12px 0;line-height:1.6}.badge{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:12px;padding:3px 8px;font-size:12px}
+input[type=text],textarea{width:100%;border:1px solid #cfd4dc;border-radius:11px;padding:13px;font-size:18px;outline:none;background:#fff}textarea{min-height:105px;resize:vertical}input[type=text]:focus,textarea:focus{border-color:#8ba0ff;box-shadow:0 0 0 3px rgba(80,105,255,.12)}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.choice{text-align:left;line-height:1.4;min-height:52px}.choice.correct{background:#edf8f0;border-color:#45a264}.choice.wrong{background:#fff0f0;border-color:#d95a5a}
+.feedback{font-weight:700;margin-top:12px;line-height:1.55}.good{color:#17723a}.bad{color:#c63434}.neutral{color:#4b5563}.details{margin-top:14px;padding-top:14px;border-top:1px solid #e5e7eb}.detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.box{background:#f8fafc;border-radius:10px;padding:12px;line-height:1.6}.ipa{font-size:23px;font-weight:700}.hidden{display:none!important}
+.bankgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.bankitem{background:#f8fafc;border-radius:9px;padding:10px;line-height:1.45}.end{text-align:center}.review{text-align:left;margin-top:12px}.reviewrow{border-top:1px solid #e5e7eb;padding:8px 0}
+.mic{font-size:18px;font-weight:700}.transcript{margin-top:8px;padding:10px;background:#fff;border:1px dashed #cfd4dc;border-radius:8px;min-height:44px}.meter{height:10px;background:#e5e7eb;border-radius:8px;overflow:hidden;margin-top:8px}.meter>div{height:100%;width:0;background:#6b7280;transition:width .25s}
+kbd{background:#eee;border:1px solid #ccc;border-bottom-width:2px;border-radius:4px;padding:1px 5px}
+@media(max-width:780px){.stats{grid-template-columns:1fr 1fr}.choices,.detailgrid,.bankgrid{grid-template-columns:1fr}.prompt{font-size:23px}}
+</style></head><body>
+<div class="wrap"><div class="card">
+<div class="row"><div><h1>Homework Day 3 – TOEIC + Từ vựng + Bài nói</h1><div class="muted">Dựa trên Test 1–5 và phần Vocabulary trong file của bạn · IPA Mỹ · TOEIC · nghe nghĩa Việt → nói tiếng Anh bằng micro</div></div><span class="grow"></span><button id="reset" class="btn">Xóa tiến độ</button></div>
+
+<div class="tabs">
+<button class="tab active" data-tab="vocab">📚 Từ vựng</button>
+<button class="tab" data-tab="test1">Test 1</button><button class="tab" data-tab="test2">Test 2</button><button class="tab" data-tab="test3">Test 3</button><button class="tab" data-tab="test4">Test 4</button><button class="tab" data-tab="test5">Test 5</button>
+<button class="tab" data-tab="testall">🎯 TOEIC tổng hợp</button><button class="tab" data-tab="speaking">🎤 Bài nói</button>
+</div>
+
+<div class="stats"><div class="stat"><b id="attempts">0</b>Lượt làm</div><div class="stat"><b id="correct">0</b>Đúng</div><div class="stat"><b id="wrong">0</b>Sai</div><div class="stat"><b id="weak">0</b>Cần ôn</div></div>
+
+<div id="vocabControls">
+<div class="modes">
+<button class="mode active" data-mode="mixed">Tổng hợp</button><button class="mode" data-mode="listenWrite">Nghe → viết Anh</button><button class="mode" data-mode="enVi">Anh → Việt</button><button class="mode" data-mode="viEn">Việt → Anh</button><button class="mode" data-mode="enZh">Anh → Trung</button><button class="mode" data-mode="zhEn">Trung → Anh</button><button class="mode" data-mode="cloze">Điền câu</button><button class="mode" data-mode="sentence">Đặt câu Anh</button><button class="mode" data-mode="weak">🔥 Ôn từ sai</button>
+</div>
+<div class="row"><label>Số câu: <select id="count"><option>10</option><option>20</option><option>30</option><option value="999">Tất cả</option></select></label><span class="grow"></span><button id="listenBtn" class="btn">🔊 Nghe nhanh hơn [Space]</button><button id="slowBtn" class="btn">🐢 Chậm [Shift+Space]</button><button id="newRound" class="btn">🔀 Lượt mới</button></div>
+</div>
+
+<div class="shortcut"><b>⌨️ Phím nhanh:</b> <b>Space</b> nghe · <b>Shift+Space</b> nghe chậm · <b>Enter</b> kiểm tra/sang câu · <b>1–4</b> chọn đáp án · ở phần nói có thể bấm <b>R</b> để mở micro.<br><span class="small">Anh → Việt tự phát âm khi sang câu mới. Ở <b>Bài nói</b>: nghĩa tiếng Việt sẽ hiện rõ trên màn hình và vẫn được đọc tự động; bạn nhìn/nghe rồi nói đáp án bằng tiếng Anh. Đáp án tiếng Anh không hiện trước.</span></div>
+
+<div id="quiz">
+<div class="row"><span id="source" class="badge"></span><span class="grow"></span><span id="progress" class="small"></span></div><div id="score" class="small"></div>
+<div id="prompt" class="prompt"></div><div id="context" class="context hidden"></div><div id="listenArea" class="listen hidden"><div class="ico">🎧</div><b>Nhấp để nghe</b></div><div id="choices" class="choices hidden"></div>
+<div id="typing"><input id="answer" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Tự viết đáp án..."><div class="controls" style="margin-top:9px"><button id="check" class="btn">Kiểm tra</button></div></div>
+<div id="sentenceArea" class="hidden"><textarea id="sentenceInput" placeholder="Tự đặt một câu tiếng Anh..."></textarea><div class="controls" style="margin-top:9px"><button id="sentenceCheck" class="btn">Xem câu mẫu</button></div></div>
+
+<div id="speakingArea" class="speechbox hidden">
+<div id="speakInstruction"></div>
+<div class="controls" style="margin-top:8px"><button id="speakListen" class="btn">🔊 Nghe nghĩa Việt</button><button id="micBtn" class="btn mic">🎤 Ghi âm câu trả lời [R]</button><button id="revealSpeak" class="btn">👁 Xem đáp án</button></div>
+<div id="transcript" class="transcript">Lời bạn nói sẽ hiện ở đây.</div><div class="meter"><div id="meterFill"></div></div><div id="speechScore" class="small" style="margin-top:6px"></div>
+</div>
+
+<div id="feedback" class="feedback"></div>
+<div id="details" class="details hidden"><div class="detailgrid"><div class="box"><div id="word" style="font-size:20px;font-weight:700"></div><div id="ipa" class="ipa"></div><div id="means" style="margin-top:7px"></div><div id="coll" style="margin-top:7px"></div></div><div class="box"><b>Câu mẫu</b><div id="example" style="margin-top:7px"></div><div class="controls" style="margin-top:7px"><button id="playEx" class="btn">🎧 Nghe câu mẫu</button></div></div></div></div>
+<div class="controls" style="margin-top:10px"><button id="next" class="btn hidden">Câu tiếp theo</button></div>
+</div>
+
+<div id="end" class="end hidden"><h2>Hoàn thành</h2><p id="result"></p><div class="controls" style="justify-content:center"><button id="redoWrong" class="btn">🔁 Làm lại câu sai</button><button id="again" class="btn">🔀 Lượt mới</button></div><div id="review" class="review"></div></div>
+
+<details id="bank"><summary><b>📖 Xem toàn bộ từ vựng Day 3</b></summary><div style="margin-top:10px"><input id="search" type="text" placeholder="Tìm English / 中文 / Việt..."></div><div id="bankgrid" class="bankgrid"></div></details>
+</div></div>
+
+<script>
+const VOCAB=[{"n":1,"p":11,"en":"engine","zh":"發動機","vi":"động cơ","ex":"He's inspecting the engine of a truck.","coll":"inspect an engine","ipa":"/ˈɛndʒɪn/"},{"n":2,"p":11,"en":"gather around","zh":"聚集在……周圍","vi":"tụ tập xung quanh","ex":"Several employees are gathered around a conference table.","coll":"be gathered around + place/object","ipa":"/ɡˈæðɚ ɚˈaʊnd/"},{"n":3,"p":11,"en":"bend over","zh":"彎腰；俯身","vi":"cúi người, khom lưng","ex":"The worker is bending over to pick up a tool.","coll":"bend over to + V","ipa":"/bˈɛnd ˈoʊvɚ/"},{"n":4,"p":11,"en":"wheel","zh":"車輪","vi":"bánh xe","ex":"A worker is replacing a wheel.","coll":"replace a wheel","ipa":"/wˈil/"},{"n":5,"p":11,"en":"prop against","zh":"靠著支撐；倚靠","vi":"dựng/tựa vào","ex":"A ladder is propped against the wall.","coll":"prop A against B","ipa":"/prˈɑp əɡˈɛnst/"},{"n":6,"p":12,"en":"a stack of bricks","zh":"一疊／一堆磚塊","vi":"một chồng gạch","ex":"Several stacks of bricks have been placed near a desk.","coll":"a stack of + plural noun","ipa":"/ə stˈæk ˈʌv brˈɪks/"},{"n":7,"p":12,"en":"collect","zh":"收集","vi":"thu gom, nhặt","ex":"The workers are collecting pieces of wood from the floor.","coll":"collect pieces of wood","ipa":"/kəlˈɛkt/"},{"n":8,"p":12,"en":"piece of wood","zh":"一塊木頭","vi":"một mảnh/miếng gỗ","ex":"The workers are collecting pieces of wood from the floor.","coll":"pieces of wood","ipa":"/pˈis ˈʌv wˈʊd/"},{"n":9,"p":12,"en":"handrail","zh":"扶手；欄杆","vi":"tay vịn, lan can","ex":"A worker is repairing the handrail along the staircase.","coll":"repair/install a handrail","ipa":"/ˈhændˌreɪl/"},{"n":10,"p":12,"en":"adjust the height","zh":"調整高度","vi":"điều chỉnh độ cao","ex":"The employees are adjusting the height of an office chair.","coll":"adjust the height of + object","ipa":"/ədʒˈʌst ðə hˈaɪt/"},{"n":11,"p":13,"en":"vending cart","zh":"販售推車","vi":"xe đẩy bán hàng","ex":"A man is pushing a vending cart along the sidewalk.","coll":"push a vending cart","ipa":"/ˈvɛndɪŋ kˈɑrt/"},{"n":12,"p":13,"en":"mobile food stand","zh":"流動餐飲攤位","vi":"quầy bán thức ăn di động","ex":"A mobile food stand is selling sandwiches.","coll":"mobile food stand / food truck","ipa":"/mˈoʊbəl fˈud stˈænd/"},{"n":13,"p":13,"en":"laundry cart","zh":"洗衣推車","vi":"xe đẩy đồ giặt","ex":"He's looking into a laundry cart.","coll":"look into a laundry cart","ipa":"/ˈlɔndri kˈɑrt/"},{"n":14,"p":13,"en":"hanger","zh":"衣架","vi":"móc treo quần áo","ex":"A jacket is hanging on a wooden hanger.","coll":"hang clothes on a hanger","ipa":"/hˈæŋɚ/"},{"n":15,"p":13,"en":"doorway","zh":"門口；門道","vi":"lối cửa, khung cửa","ex":"A woman is standing in the doorway.","coll":"in the doorway","ipa":"/ˈdɔrˌweɪ/"},{"n":16,"p":13,"en":"package","zh":"包裹；包裝","vi":"gói hàng; đóng gói","ex":"A package is on the counter.","coll":"open a package","ipa":"/ˈpækɪdʒ/"},{"n":17,"p":14,"en":"plug in","zh":"插上電源；插入","vi":"cắm điện","ex":"One of the women is plugging in a printer.","coll":"plug in + device","ipa":"/plˈʌɡ ɪn/"},{"n":18,"p":14,"en":"attach","zh":"連接；黏上","vi":"gắn, đính","ex":"She is attaching price tags to some merchandise.","coll":"attach A to B","ipa":"/ətˈætʃ/"},{"n":19,"p":14,"en":"merchandise","zh":"商品；貨品","vi":"hàng hóa","ex":"She is attaching price tags to some merchandise.","coll":"display merchandise","ipa":"/ˈmɝtʃənˌdaɪs/"},{"n":20,"p":14,"en":"throw away","zh":"扔掉；丟棄","vi":"vứt đi","ex":"An employee is throwing away some empty containers.","coll":"throw away + object / throw it away","ipa":"/θrˈoʊ əwˈeɪ/"},{"n":21,"p":14,"en":"tools","zh":"工具","vi":"dụng cụ","ex":"A man is putting some tools in a toolbox.","coll":"tools / toolbox / workbench","ipa":"/tˈulz/"},{"n":22,"p":14,"en":"empty tray","zh":"空托盤","vi":"khay trống","ex":"One of the employees is walking with an empty tray.","coll":"carry an empty tray","ipa":"/ˈɛmpti trˈeɪ/"},{"n":23,"p":14,"en":"tape","zh":"膠帶；黏貼","vi":"băng dính; dán","ex":"One of the employees is taping signs to a board.","coll":"tape a sign to a board","ipa":"/tˈeɪp/"},{"n":24,"p":15,"en":"a pair of scissors","zh":"一把剪刀","vi":"một chiếc kéo","ex":"One of the employees is carrying a pair of scissors.","coll":"a pair of scissors","ipa":"/ə pˈɛr ˈʌv ˈsɪzɚz/"},{"n":25,"p":15,"en":"apron","zh":"圍裙","vi":"tạp dề","ex":"One of the employees is hanging an apron on a hook.","coll":"hang an apron on a hook","ipa":"/ˈeɪprən/"},{"n":26,"p":15,"en":"dig","zh":"挖；掘","vi":"đào, xới đất","ex":"He's digging in a garden.","coll":"dig a hole / dig in a garden","ipa":"/dˈɪɡ/"},{"n":27,"p":15,"en":"floor tiles","zh":"地磚","vi":"gạch lát sàn","ex":"He's replacing some floor tiles.","coll":"replace floor tiles","ipa":"/flˈɔr tˈaɪlz/"},{"n":28,"p":15,"en":"trim trees","zh":"修剪樹木","vi":"cắt tỉa cây","ex":"He's trimming some trees.","coll":"trim trees / trim hair","ipa":"/trˈɪm trˈiz/"},{"n":29,"p":15,"en":"dry cleaner's","zh":"乾洗店","vi":"tiệm giặt khô","ex":"A customer is picking up clothing at a dry cleaner's.","coll":"pick up / drop off clothing","ipa":"/drˈaɪ cleaner's/"},{"n":30,"p":16,"en":"cash","zh":"現金","vi":"tiền mặt","ex":"A customer is handing a worker some cash.","coll":"pay in cash","ipa":"/kˈæʃ/"},{"n":31,"p":16,"en":"pour a beverage","zh":"倒飲料","vi":"rót đồ uống","ex":"She's pouring a beverage.","coll":"pour A into B","ipa":"/pˈɔr ə bˈɛvɚɪdʒ/"},{"n":32,"p":16,"en":"refrigerated","zh":"冷藏的","vi":"được làm lạnh, có tủ lạnh","ex":"She's facing a refrigerated display case.","coll":"refrigerated display case","ipa":"/rɪˈfrɪdʒəˌreɪtɪd/"},{"n":33,"p":16,"en":"server","zh":"服務員","vi":"nhân viên phục vụ","ex":"She's ordering her lunch from a server.","coll":"order food from a server","ipa":"/sˈɝvɚ/"},{"n":34,"p":16,"en":"tent","zh":"帳篷","vi":"lều","ex":"He's setting up a tent.","coll":"set up a tent","ipa":"/tˈɛnt/"},{"n":35,"p":16,"en":"rear doors","zh":"後門；後部車門","vi":"cửa sau","ex":"The rear doors of a van are closed.","coll":"rear doors of a van","ipa":"/rˈɪr dˈɔrz/"},{"n":36,"p":16,"en":"vehicle","zh":"交通工具；車輛","vi":"phương tiện, xe","ex":"Some boxes have been stored inside a vehicle.","coll":"inside a vehicle","ipa":"/ˈviəkəl/"},{"n":37,"p":17,"en":"positioned","zh":"放置；定位","vi":"được đặt, bố trí","ex":"The speaker is positioned next to a podium.","coll":"be positioned next to","ipa":"/pəzˈɪʃənd/"},{"n":38,"p":17,"en":"graph","zh":"圖表","vi":"biểu đồ","ex":"The man is drawing a graph on a presentation board.","coll":"draw a graph","ipa":"/ɡrˈæf/"},{"n":39,"p":17,"en":"chalkboard","zh":"黑板","vi":"bảng đen","ex":"She's kneeling in front of a chalkboard.","coll":"in front of a chalkboard","ipa":"/ˈtʃɔkˌbɔrd/"},{"n":40,"p":17,"en":"tile floor","zh":"磁磚地板","vi":"sàn lát gạch","ex":"She's sweeping a tile floor.","coll":"sweep a tile floor","ipa":"/tˈaɪl flˈɔr/"},{"n":41,"p":17,"en":"receipt","zh":"收據","vi":"biên lai","ex":"She's signing a receipt.","coll":"sign / issue a receipt","ipa":"/rɪˈsit/"},{"n":42,"p":17,"en":"clear off a countertop","zh":"清理檯面","vi":"dọn sạch mặt bàn/quầy","ex":"She's clearing off a countertop.","coll":"clear off + surface","ipa":"/klˈɪr ˈɔf ə kˈaʊntɚtˌɑp/"},{"n":43,"p":17,"en":"announcer","zh":"播音員；廣播員","vi":"phát thanh viên","ex":"An announcer is setting down a microphone.","coll":"announcer / microphone","ipa":"/əˈnaʊnsɚ/"},{"n":44,"p":17,"en":"set down","zh":"放下","vi":"đặt xuống","ex":"An announcer is setting down a microphone.","coll":"set down + object","ipa":"/sˈɛt dˈaʊn/"},{"n":45,"p":18,"en":"construct a platform","zh":"搭建平台","vi":"xây/dựng một bục, sàn","ex":"Some workers are constructing a platform.","coll":"construct a platform","ipa":"/kənstrˈʌkt ə plˈætfˌɔrm/"},{"n":46,"p":18,"en":"performer","zh":"表演者","vi":"người biểu diễn","ex":"There are some performers on a stage.","coll":"performer on a stage","ipa":"/pɚˈfɔrmɚ/"},{"n":47,"p":18,"en":"unpack","zh":"拆包；取出","vi":"mở/khui hành lý, lấy đồ ra","ex":"Some musicians are unpacking their equipment.","coll":"unpack equipment","ipa":"/ənpˈæk/"},{"n":48,"p":18,"en":"passenger","zh":"乘客","vi":"hành khách","ex":"Some bus passengers are waiting on the walkway.","coll":"bus passenger / board a bus","ipa":"/ˈpæsəndʒɚ/"},{"n":49,"p":18,"en":"down a road","zh":"沿著道路向前","vi":"dọc theo con đường","ex":"A bus is being driven down a road.","coll":"drive down a road","ipa":"/dˈaʊn ə rˈoʊd/"},{"n":50,"p":18,"en":"purse","zh":"女用手提包；錢包","vi":"túi xách nhỏ, ví nữ","ex":"One of the women is removing an item from her purse.","coll":"remove an item from a purse","ipa":"/pɝs/"},{"n":51,"p":18,"en":"windowsill","zh":"窗台","vi":"bệ cửa sổ","ex":"The woman is leaning against a windowsill.","coll":"lean against a windowsill","ipa":"/ˈwɪndoʊˌsɪl/"},{"n":52,"p":18,"en":"workstation","zh":"工作站；工作台","vi":"trạm/bàn làm việc","ex":"Some cabinets have been opened at a workstation.","coll":"at a workstation","ipa":"/ˈwɝkˌsteɪʃən/"}], TESTS={"1":[{"q":1,"opts":["He's parking a truck.","He's lifting some furniture.","He's starting an engine.","He's driving a car."],"a":1},{"q":2,"opts":["Some curtains have been closed.","Some jackets have been laid out on a chair.","Some people are gathered around a desk.","Someone is turning on a lamp."],"a":2},{"q":3,"opts":["One of the women is reaching into her bag.","The women are waiting in line.","The man is leading a tour group.","The man is opening a cash register."],"a":1},{"q":4,"opts":["The man is bending over a bicycle.","A wheel has been propped against a stack of bricks.","The man is collecting some pieces of wood.","A handrail is being installed."],"a":0},{"q":5,"opts":["An armchair has been placed under a window.","Some reading materials have fallen on a floor.","Some flowers are being watered.","Some picture frames are hanging on a wall."],"a":3},{"q":6,"opts":["She's adjusting the height of an umbrella.","She's inspecting the tires on a vending cart.","There is a mobile food stand on a walkway.","There are some cooking utensils on a ground."],"a":2}],"2":[{"q":1,"opts":["He's folding some clothes.","He's looking into a laundry cart.","He's removing some clothes from hangers.","He's standing in front of a washing machine."],"a":1},{"q":2,"opts":["The man is leaning against a doorway.","The man is opening up a package.","One of the women is plugging in a printer.","One of the women is wearing glasses."],"a":3},{"q":3,"opts":["She is attaching price tags to some merchandise.","She is piling up some boxes.","She is holding up some fruit.","She is throwing away a plastic bag."],"a":2},{"q":4,"opts":["A jacket has been placed on the ground.","A man is watering some flowers.","A garden has been planted outside the building.","A man is putting some tools in a toolbox."],"a":2},{"q":5,"opts":["Some chairs are stacked in the corner.","Some light fixtures are mounted on the wall.","Some tables are covered with tablecloths.","Some furniture is on display in a window."],"a":1},{"q":6,"opts":["One of the employees is walking with an empty tray.","One of the employees is taping signs to a board.","One of the employees is carrying a pair of scissors.","One of the employees is hanging an apron on a hook."],"a":0}],"3":[{"q":1,"opts":["He's leaning over a container.","He's digging in a garden.","He's replacing some floor tiles.","He's trimming some trees."],"a":0},{"q":2,"opts":["A customer is picking up clothing at a dry cleaner's.","A customer is trying on a jacket.","A customer is handing a worker some cash.","A worker is typing on a computer."],"a":0},{"q":3,"opts":["She's paying for her meal.","She's pouring a beverage.","She's facing a refrigerated display case.","She's ordering her lunch from a server."],"a":2},{"q":4,"opts":["He's putting vegetables into a bag.","He's setting up a tent.","The rear doors of a van are closed.","Some boxes have been stored inside a vehicle."],"a":3},{"q":5,"opts":["The speaker is positioned next to a podium.","The man is drawing a graph on a presentation board.","One of the women is watching a video.","One of the women is adjusting her glasses."],"a":1},{"q":6,"opts":["Some chairs have been arranged on a balcony.","A clock has been propped up on a shelf.","Some placemats are laid out on a bench.","A light fixture is hanging above a dining area."],"a":3}],"4":[{"q":1,"opts":["She's kneeling in front of a chalkboard.","She's sweeping a tile floor.","She's signing a receipt.","She's clearing off a countertop."],"a":0},{"q":2,"opts":["A man is polishing a floor.","A man is unzipping a suitcase.","A man is picking up a cushion.","A man is drinking from a bottle."],"a":3},{"q":3,"opts":["An announcer is setting down a microphone.","Some workers are constructing a platform.","There are some performers on a stage.","Some musicians are unpacking their equipment."],"a":2},{"q":4,"opts":["The woman is hanging up some posters.","The woman is writing on a document.","A laptop is being put away.","A flowerpot is being stored on a shelf."],"a":1},{"q":5,"opts":["The presenter is closing a window.","The presenter is standing behind a podium.","The audience is facing a screen.","The audience is seated in a circle."],"a":2},{"q":6,"opts":["Some bus passengers are waiting on the walkway.","Some bicycles are mounted on a bus.","A bus is being driven down a road.","A garage door has been opened."],"a":2}],"5":[{"q":1,"opts":["The people are watching a presentation.","Some books are being placed on a cart.","The people are kneeling in front of a shelf.","The people are visiting a library."],"a":3},{"q":2,"opts":["The women are facing each other.","The women are walking together.","One of the women is removing an item from her purse.","One of the women is drinking from a coffee cup."],"a":2},{"q":3,"opts":["One of the men is emptying out a plastic bag.","They are waiting in line at a checkout counter.","One of the men is pointing at some flowers.","They are selecting some food and vegetables."],"a":2},{"q":4,"opts":["Some plants have been arranged in rows.","The woman is leaning against a windowsill.","Some cabinets have been opened at a workstation.","The woman is reading a billboard."],"a":0},{"q":5,"opts":["A house overlooks a fishing pier.","A duck is swimming in a lake.","A bridge crosses over a river.","Some trees border a pond."],"a":3},{"q":6,"opts":["One of the women is picking up a suitcase.","One of the women is holding a notebook under her arm.","One of the women is standing in the doorway.","One of the women is posting a sign on the wall."],"a":1}]};
+const KEY="homework_day3_vocab_toeic_speaking_v1";
+const $=id=>document.getElementById(id);
+let tab="vocab",mode="mixed",order=[],pos=0,score=0,checked=false,wrongRound=[],currentType="listenWrite",currentTest=null,speakType="viToEn",recognition=null,listening=false;
+
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return {}}}function save(s){localStorage.setItem(KEY,JSON.stringify(s))}
+function st(id){return load()[id]||{a:0,c:0,w:0}}function rec(id,ok){const s=load(),r=s[id]||{a:0,c:0,w:0};r.a++;ok?r.c++:r.w++;s[id]=r;save(s);stats();bank($("search").value||"")}
+function norm(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/[^a-z0-9\s']/g," ").replace(/\s+/g," ").trim()}function nz(s){return String(s||"").replace(/[，。；、：:,.!！?？\s]/g,"")}
+const STOP=new Set(["duoc","dang","da","bi","mot","cai","cac","nhung","o","tren","duoi","vao","ra","len","xuong","cua","va","hoac","trong","ngoai","phia","la","voi","theo","tu","cho"]);
+function vitok(s){return norm(s).split(" ").filter(x=>x.length>=2&&!STOP.has(x))}
+function viOK(v,ans){const a=norm(v),b=norm(ans);if(a===b||a.includes(b)||b.includes(a))return true;const A=new Set(vitok(a)),B=new Set(vitok(b));let c=0;A.forEach(x=>B.has(x)&&c++);return c>=1&&(c/A.size>=.45||c/B.size>=.45)}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function isWeak(x){const r=st(x.n);return r.w>=2||(r.a>=3&&r.w/r.a>=.35)}function stats(){let a=0,c=0,w=0,k=0;VOCAB.forEach(x=>{const r=st(x.n);a+=r.a;c+=r.c;w+=r.w;if(isWeak(x))k++});$("attempts").textContent=a;$("correct").textContent=c;$("wrong").textContent=w;$("weak").textContent=k}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function speak(t,r=.82){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=r;const vs=speechSynthesis.getVoices();u.voice=vs.find(v=>/en-US/i.test(v.lang)&&/Natural|Neural|Samantha|Google|Aria|Jenny|Ava/i.test(v.name))||vs.find(v=>/en-US/i.test(v.lang))||null;speechSynthesis.speak(u)}
+function speakVi(t,r=.88){
+  if(!("speechSynthesis" in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t);
+  u.lang="vi-VN";u.rate=r;
+  const vs=speechSynthesis.getVoices();
+  u.voice=vs.find(v=>/vi-VN/i.test(v.lang)&&/Natural|Neural|Google|Vietnam/i.test(v.name))
+    ||vs.find(v=>/^vi/i.test(v.lang))||null;
+  speechSynthesis.speak(u);
+}
+function showDetails(x){$("word").textContent=x.en;$("ipa").textContent=x.ipa;$("means").innerHTML=`<b>🇻🇳</b> ${esc(x.vi)}<br><b>中文</b> ${esc(x.zh)}`;$("coll").textContent="Cụm thường gặp: "+x.coll;$("example").textContent=x.ex;$("details").classList.remove("hidden")}
+function setTab(){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));$("vocabControls").classList.toggle("hidden",!["vocab"].includes(tab));$("bank").classList.toggle("hidden",!["vocab","speaking"].includes(tab));start()}
+function setMode(){document.querySelectorAll(".mode").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));start()}
+function clearUI(){$("context").classList.add("hidden");$("listenArea").classList.add("hidden");$("choices").classList.add("hidden");$("choices").innerHTML="";$("typing").classList.remove("hidden");$("sentenceArea").classList.add("hidden");$("speakingArea").classList.add("hidden");$("details").classList.add("hidden");$("next").classList.add("hidden");$("feedback").textContent="";$("answer").value="";$("answer").readOnly=false;$("sentenceInput").value="";$("transcript").textContent="Lời bạn nói sẽ hiện ở đây.";$("meterFill").style.width="0";$("speechScore").textContent=""}
+function vocabPool(){let p=VOCAB;if(mode==="weak"){const q=p.filter(isWeak);p=q.length?q:p}return p}
+function chooseMode(){if(mode!=="mixed"&&mode!=="weak")return mode;const m=["listenWrite","enVi","viEn","enZh","zhEn","cloze","sentence"];return m[Math.floor(Math.random()*m.length)]}
+function start(custom=null){score=0;pos=0;checked=false;wrongRound=[];$("quiz").classList.remove("hidden");$("end").classList.add("hidden");
+ if(tab==="vocab"){let p=custom||vocabPool();order=shuffle(p).slice(0,Math.min(Number($("count").value),p.length))}
+ else if(tab.startsWith("test")&&tab!=="testall"){const n=Number(tab.replace("test",""));order=TESTS[n].map(x=>({...x,test:n}))}
+ else if(tab==="testall"){order=shuffle(Object.entries(TESTS).flatMap(([t,qs])=>qs.map(x=>({...x,test:Number(t)}))))}
+ else if(tab==="speaking"){order=shuffle(VOCAB).slice(0,20)}
+ show();
+}
+function show(){clearUI();checked=false;
+ if(tab==="vocab")return showVocab();
+ if(tab==="speaking")return showSpeaking();
+ return showTest();
+}
+function showVocab(){const x=order[pos];currentType=chooseMode();$("source").textContent=`Vocabulary · Trang ${x.p}`;$("progress").textContent=`Câu ${pos+1}/${order.length}`;$("score").textContent=`Điểm: ${score}/${pos}`;
+ if(currentType==="listenWrite"){$("prompt").textContent="Nghe → viết tiếng Anh";$("listenArea").classList.remove("hidden");setTimeout(()=>speak(x.en),350)}
+ else if(currentType==="enVi"){$("prompt").textContent=x.en+" → ?";$("context").innerHTML="🔊 Tự phát âm khi sang câu mới · viết nghĩa Việt theo ý hiểu.";$("context").classList.remove("hidden");$("answer").placeholder="Nghĩa tiếng Việt...";setTimeout(()=>speak(x.en),300)}
+ else if(currentType==="viEn"){$("prompt").textContent=x.vi+" → ?";$("answer").placeholder="Viết tiếng Anh..."}
+ else if(currentType==="enZh"){$("prompt").textContent=x.en+" → 中文 ?";$("answer").placeholder="Viết nghĩa tiếng Trung..."}
+ else if(currentType==="zhEn"){$("prompt").textContent=x.zh+" → English ?";$("answer").placeholder="Viết tiếng Anh..."}
+ else if(currentType==="cloze"){let sent=x.ex,idx=sent.toLowerCase().indexOf(x.en.toLowerCase()),ans=x.en;if(idx<0){const key=x.en.split(" ")[0];idx=sent.toLowerCase().indexOf(key.toLowerCase());ans=idx>=0?sent.slice(idx,idx+key.length):x.en}if(idx>=0)sent=sent.slice(0,idx)+"______"+sent.slice(idx+ans.length);$("prompt").textContent="Điền từ/cụm vào câu";$("context").textContent=sent;$("context").classList.remove("hidden");$("answer").dataset.cloze=ans}
+ else if(currentType==="sentence"){$("prompt").textContent="✍️ Đặt câu tiếng Anh";$("context").innerHTML=`Dùng <b>${esc(x.en)}</b> trong một câu.<br>🇻🇳 ${esc(x.vi)} · 中文 ${esc(x.zh)}`;$("context").classList.remove("hidden");$("typing").classList.add("hidden");$("sentenceArea").classList.remove("hidden")}
+}
+function testChoices(opts,answer){$("typing").classList.add("hidden");$("choices").classList.remove("hidden");opts.forEach((t,i)=>{const b=document.createElement("button");b.className="choice";b.textContent=String.fromCharCode(65+i)+". "+t;b.onclick=()=>gradeTest(b,i,answer);$("choices").appendChild(b)})}
+function showTest(){const q=order[pos];$("source").textContent=`Test ${q.test} · câu ${q.q} · từ ghi chú`;$("progress").textContent=`Câu ${pos+1}/${order.length}`;$("score").textContent=`Điểm: ${score}/${pos}`;$("prompt").textContent="Chọn câu mô tả đúng";testChoices(q.opts,q.a)}
+function gradeTest(btn,i,a){if(checked)return;checked=true;[...$("choices").children].forEach((b,j)=>{if(j===a)b.classList.add("correct");b.disabled=true});if(i===a){score++;$("feedback").textContent="✓ Đúng";$("feedback").className="feedback good"}else{btn.classList.add("wrong");$("feedback").textContent="✗ Sai · đáp án: "+String.fromCharCode(65+a);$("feedback").className="feedback bad";wrongRound.push(`Test ${order[pos].test} - ${order[pos].q}`)}$("next").classList.remove("hidden")}
+function checkVocab(){if(checked){next();return}const x=order[pos],v=$("answer").value.trim();if(!v)return;let ok=false;if(currentType==="enVi")ok=viOK(v,x.vi);else if(currentType==="enZh")ok=nz(v)===nz(x.zh)||nz(x.zh).includes(nz(v));else if(currentType==="cloze")ok=norm(v)===norm($("answer").dataset.cloze);else ok=norm(v)===norm(x.en);checked=true;$("answer").readOnly=true;rec(x.n,ok);if(ok){score++;$("feedback").textContent="✓ Đúng";$("feedback").className="feedback good"}else{wrongRound.push(x.n);$("feedback").textContent="✗ Chưa đúng · "+x.en;$("feedback").className="feedback bad"}showDetails(x);$("next").classList.remove("hidden")}
+function checkSentence(){if(checked){next();return}const x=order[pos],v=$("sentenceInput").value.trim();if(!v)return;checked=true;const used=norm(v).includes(norm(x.en))||norm(v).includes(norm(x.en.split(" ")[0]));$("feedback").textContent=used?"✓ Bạn đã dùng từ mục tiêu. So sánh với câu mẫu.":"⚠️ Chưa thấy từ mục tiêu trong câu. Xem câu mẫu bên dưới.";$("feedback").className=used?"feedback good":"feedback neutral";if(used)score++;else wrongRound.push(x.n);rec(x.n,used);showDetails(x);$("next").classList.remove("hidden")}
+function next(){if(!checked){if(tab==="vocab"&&currentType==="sentence")checkSentence();else if(tab==="vocab")checkVocab();return}pos++;if(pos>=order.length)return finish();show()}
+function finish(){$("quiz").classList.add("hidden");$("end").classList.remove("hidden");$("result").textContent=`Kết quả: ${score}/${order.length}`;$("review").innerHTML=wrongRound.length?"<h3>Cần ôn lại</h3>"+[...new Set(wrongRound)].map(id=>{if(typeof id==="number"){const x=VOCAB.find(z=>z.n===id);return `<div class="reviewrow"><b>${esc(x.en)}</b> — ${esc(x.vi)}</div>`}return `<div class="reviewrow">${esc(id)}</div>`}).join(""):"<p>🎉 Không có câu sai.</p>"}
+function bank(q=""){const n=norm(q),z=nz(q);$("bankgrid").innerHTML=VOCAB.filter(x=>!q||norm(x.en+" "+x.vi).includes(n)||nz(x.zh).includes(z)).map(x=>`<div class="bankitem"><b>${x.n}. ${esc(x.en)}</b> <span class="small">${esc(x.ipa)}</span><br>🇻🇳 ${esc(x.vi)}<br>中文 ${esc(x.zh)}<br><span class="small">${esc(x.ex)}</span></div>`).join("")}
+
+/* Speaking */
+function speechSimilarity(a,b){const A=norm(a).split(" ").filter(Boolean),B=norm(b).split(" ").filter(Boolean);if(!A.length||!B.length)return 0;let hit=0;B.forEach(w=>{if(A.includes(w))hit++});return Math.round(100*hit/B.length)}
+function showSpeaking(){
+  const x=order[pos];
+  speakType="viToEn";
+  $("source").textContent=`Speaking · Trang ${x.p}`;
+  $("progress").textContent=`Bài ${pos+1}/${order.length}`;
+  $("score").textContent=`Nói đúng: ${score}/${pos}`;
+  $("typing").classList.add("hidden");
+  $("speakingArea").classList.remove("hidden");
+  $("prompt").innerHTML=`🎤 <span style="font-size:30px">${esc(x.vi)}</span>`;
+  $("context").innerHTML="Nhìn nghĩa tiếng Việt ở trên, sau đó bấm micro và nói từ/cụm tiếng Anh tương ứng. Đáp án tiếng Anh chưa hiện.";
+  $("context").classList.remove("hidden");
+  $("speakInstruction").innerHTML=`<b>🇻🇳 Nghĩa tiếng Việt:</b> <span style="font-size:22px;font-weight:700">${esc(x.vi)}</span><br><span class="small">Web vẫn tự đọc nghĩa Việt. Nếu giọng không rõ, chỉ cần nhìn phần chữ này.</span>`;
+  $("transcript").textContent="Sau khi bạn nói, câu nhận dạng tiếng Anh sẽ hiện ở đây.";
+  $("speechScore").textContent="";
+  $("meterFill").style.width="0";
+  setTimeout(()=>speakVi(x.vi,.88),400);
+}
+function speechTarget(){return order[pos].en}
+function startMic(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){
+    $("transcript").textContent="Trình duyệt này chưa hỗ trợ nhận dạng giọng nói. Hãy dùng Chrome hoặc Edge để luyện bằng micro.";
+    return;
+  }
+  if(listening&&recognition){recognition.stop();return}
+  const x=order[pos];
+  recognition=new SR();
+  recognition.lang="en-US";
+  recognition.interimResults=false;
+  recognition.maxAlternatives=3;
+  listening=true;
+  $("micBtn").textContent="⏹ Đang nghe...";
+  recognition.onresult=e=>{
+    const results=[...e.results[0]].map(r=>r.transcript);
+    const target=x.en;
+    let best=results[0]||"";
+    let bestScore=0;
+    for(const said of results){
+      const sim=speechSimilarity(said,target);
+      if(sim>bestScore){bestScore=sim;best=said}
+    }
+    // Accept common article variation for entries beginning with "a/an/the".
+    const strippedTarget=norm(target).replace(/^(a|an|the)\s+/,"");
+    const strippedSaid=norm(best).replace(/^(a|an|the)\s+/,"");
+    if(strippedTarget===strippedSaid)bestScore=Math.max(bestScore,95);
+    // For multiword phrases, most meaningful words heard = acceptable.
+    const targetWords=strippedTarget.split(" ").filter(w=>w.length>2);
+    const saidWords=new Set(strippedSaid.split(" "));
+    const hit=targetWords.filter(w=>saidWords.has(w)).length;
+    if(targetWords.length>=2 && hit/targetWords.length>=0.75)bestScore=Math.max(bestScore,85);
+
+    $("transcript").innerHTML=`Bạn nói: <b>${esc(best)}</b>`;
+    $("meterFill").style.width=Math.min(100,bestScore)+"%";
+    $("speechScore").textContent=`Mức khớp nhận dạng: ${bestScore}%`;
+
+    if(bestScore>=70){
+      if(!checked){checked=true;score++;rec(x.n,true)}
+      $("feedback").textContent="✓ Đúng! Bạn đã nói đúng từ/cụm tiếng Anh.";
+      $("feedback").className="feedback good";
+      showDetails(x);
+      $("next").classList.remove("hidden");
+    }else{
+      $("feedback").textContent="Chưa khớp. Hãy nghe nghĩa Việt và nói lại một lần nữa.";
+      $("feedback").className="feedback neutral";
+    }
+  };
+  recognition.onerror=e=>{
+    $("speechScore").textContent="Micro/nhận dạng giọng nói chưa hoạt động: "+e.error;
+  };
+  recognition.onend=()=>{listening=false;$("micBtn").textContent="🎤 Ghi âm câu trả lời [R]"};
+  recognition.start();
+}
+function revealSpeech(){
+  const x=order[pos];
+  showDetails(x);
+  speak(x.en,.82);
+  if(!checked){
+    checked=true;wrongRound.push(x.n);rec(x.n,false);
+    $("feedback").textContent="Đã hiện đáp án. Từ này sẽ được đưa vào nhóm cần ôn.";
+    $("feedback").className="feedback neutral";
+    $("next").classList.remove("hidden");
+  }
+}
+function hearCurrent(r=.72){if(tab==="vocab"&&order[pos])speak(order[pos].en,r);else if(tab==="speaking"&&order[pos])speakVi(order[pos].vi,r)}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;setTab()});document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>{mode=b.dataset.mode;setMode()});
+$("check").onclick=checkVocab;$("sentenceCheck").onclick=checkSentence;$("next").onclick=next;$("newRound").onclick=()=>start();$("again").onclick=()=>start();$("redoWrong").onclick=()=>{if(tab==="vocab"){const ids=[...new Set(wrongRound)].filter(x=>typeof x==="number");if(ids.length)start(VOCAB.filter(x=>ids.includes(x.n)));else start()}else start()};
+$("listenBtn").onclick=()=>hearCurrent(.82);$("slowBtn").onclick=()=>hearCurrent(.62);$("listenArea").onclick=()=>hearCurrent(.82);$("playEx").onclick=()=>speak(order[pos].ex,.82);$("speakListen").onclick=()=>{const x=order[pos];speakVi(x.vi,.88)};$("micBtn").onclick=startMic;$("revealSpeak").onclick=revealSpeech;
+$("reset").onclick=()=>{if(confirm("Xóa toàn bộ tiến độ?")){localStorage.removeItem(KEY);stats();bank();start()}};$("search").oninput=e=>bank(e.target.value);
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&document.activeElement!==$("sentenceInput")){e.preventDefault();if(checked)next();else if(tab==="vocab")checkVocab();return}if(/^[1-4]$/.test(e.key)&&!$("choices").classList.contains("hidden")&&!checked){const b=[...$("choices").children][Number(e.key)-1];if(b)b.click();return}if((e.key==="r"||e.key==="R")&&tab==="speaking"){e.preventDefault();startMic();return}if(e.code==="Space"){const editing=(document.activeElement===$("answer")&&$("answer").value.trim())||(document.activeElement===$("sentenceInput")&&$("sentenceInput").value.trim());if(!editing){e.preventDefault();hearCurrent(e.shiftKey?.62:.82)}}});
+stats();bank();setTab();
+</script></body></html>
